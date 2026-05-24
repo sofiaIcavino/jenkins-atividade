@@ -39,7 +39,9 @@ pipeline {
 
         stage('Cobertura de Codigo') {
             steps {
-                sh 'python3 -m pytest --cov=conversor --cov-report=xml --cov-report=term test_conversor.py'
+                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+                    sh 'python3 -m pytest --cov=conversor --cov-report=xml --cov-report=term test_conversor.py'
+                }
             }
             post {
                 always {

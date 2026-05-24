@@ -14,7 +14,7 @@ pipeline {
 
         stage('Instalar dependencias') {
             steps {
-                sh 'pip install pytest pytest-cov'
+                sh 'pip install pytest pytest-cov --break-system-packages'
             }
         }
 

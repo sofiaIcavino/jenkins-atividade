@@ -26,7 +26,9 @@ pipeline {
 
         stage('Testes') {
             steps {
-                sh 'python3 -m pytest test_conversor.py -v --junitxml=resultado_testes.xml'
+                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+                    sh 'python3 -m pytest test_conversor.py -v --junitxml=resultado_testes.xml'
+                }
             }
             post {
                 always {

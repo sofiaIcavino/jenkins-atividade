@@ -20,13 +20,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'python -m py_compile conversor.py'
+                sh 'python3 -m py_compile conversor.py'
             }
         }
 
         stage('Testes') {
             steps {
-                sh 'pytest test_conversor.py -v --junitxml=resultado_testes.xml'
+                sh 'python3 -m pytest test_conversor.py -v --junitxml=resultado_testes.xml'
             }
             post {
                 always {
@@ -37,7 +37,7 @@ pipeline {
 
         stage('Cobertura de Codigo') {
             steps {
-                sh 'pytest --cov=conversor --cov-report=xml --cov-report=term test_conversor.py'
+                sh 'python3 -m pytest --cov=conversor --cov-report=xml --cov-report=term test_conversor.py'
             }
             post {
                 always {
